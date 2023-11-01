@@ -1,30 +1,33 @@
 import { useEffect, useState } from "react";
 import { CardProduct } from "../components/CardProduct/CardProduct";
+import { collection, query, getDocs } from "firebase/firestore";
+import { db } from "../firebase/firebaseConfig";
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
-  const [category] = useState("MLA1055");
-  const [limitByCategories] = useState(20);
+
+
 
   useEffect(() => {
-    fetch(
-      `https://api.mercadolibre.com/sites/MLA/search?category=${category}&limit=${limitByCategories}&offset=0`
-    )
-      .then((response) => response.json())
-      .then((response) => setProducts(response.results));
+    const getProducts = async () => {
+      const querySnapshot = await getDocs(
+        query(collection(db, "productsCollection"))
+      );
+      const docs = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        fb_id: doc.id,
+      }));
+      setProducts(docs);
+    };
+    getProducts();
   }, []);
 
-  let categorySelected = products.filter((product) => {
-    return product.category_id === category;
-  });
 
-  const handleProductClick = (id) => {
-    
-  };
+  const handleProductClick = (id) => {};
 
   return (
     <div className="userSection">
-      {categorySelected.map((product) => (
+      {products.map((product) => (
         <div key={product.id} onClick={() => handleProductClick(product.id)}>
           <CardProduct
             onClick={handleProductClick}
@@ -41,9 +44,3 @@ const ItemListContainer = () => {
 };
 
 export default ItemListContainer;
-
-
-
-
-
- 
