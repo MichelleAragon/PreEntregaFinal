@@ -5,9 +5,7 @@ import { db } from "../firebase/firebaseConfig";
 
 const ItemListContainer = () => {
   const [products, setProducts] = useState([]);
-
-
-
+  
   useEffect(() => {
     const getProducts = async () => {
       const querySnapshot = await getDocs(
@@ -31,7 +29,7 @@ const ItemListContainer = () => {
         <div key={product.id} onClick={() => handleProductClick(product.id)}>
           <CardProduct
             onClick={handleProductClick}
-            id={product.id}
+            id={product.fb_id}
             title={product.title}
             condition={product.condition}
             price={product.price}

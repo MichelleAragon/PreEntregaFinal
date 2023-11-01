@@ -9,27 +9,46 @@ import ItemQuantitySelector from "../components/ItemQuantitySelector/ItemQuantit
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { useShopingCartContext } from "../hooks/ShopingCartContext";
+import {
+  collection,
+  documentId,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "../components/firebase/firebaseConfig";
 
 const ItemDetailContainer = () => {
-  let { id } = useParams();
+  const { id } = useParams();
   const [Item, setItem] = useState();
   const [qty, setQty] = useState(1);
   const [cart, setCart] = useShopingCartContext();
 
   useEffect(() => {
-    fetch(`https://api.mercadolibre.com/items/${id}`)
-      .then((res) => res.json())
-      .then((res) => setItem(res));
+    const getProductDetail = async () => {
+      const {docs}  = await getDocs(
+        query(
+          collection(db, "productsCollection"),
+          where(documentId(), "==", id)
+        )
+      );
+      const [detail] = docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+      setItem(detail);
+    };
+    getProductDetail();
   }, [id]);
+
 
   const handleClick = () => {
     setCart(cart.concat({ item: id, qty, price: Item.base_price }));
   };
 
   const deleteItem = (id) => {
-    setCart(cart.filter((cart) => cart.id === id))
-  }
-console.log(cart)
+    setCart(cart.filter((cart) => cart.id === id));
+  };
   return (
     Item && (
       <Container maxWidth="sm">
@@ -55,7 +74,7 @@ console.log(cart)
             </Typography>
           </CardContent>
           <div className="purchases-container">
-            <ItemQuantitySelector onSelect={setQty} qty={qty}/>
+            <ItemQuantitySelector onSelect={setQty} qty={qty} />
             <Link to={`/Shop`}>
               <Button
                 variant="contained"
