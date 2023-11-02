@@ -26,7 +26,7 @@ const ItemDetailContainer = () => {
 
   useEffect(() => {
     const getProductDetail = async () => {
-      const {docs}  = await getDocs(
+      const { docs } = await getDocs(
         query(
           collection(db, "productsCollection"),
           where(documentId(), "==", id)
@@ -41,14 +41,19 @@ const ItemDetailContainer = () => {
     getProductDetail();
   }, [id]);
 
-
   const handleClick = () => {
-    setCart(cart.concat({ item: id, qty, price: Item.base_price }));
+    setCart(
+      cart.concat({
+        item: id,
+        qty,
+        price: Item.base_price,
+        title: Item.title,
+        picture: Item.thumbnail_id,
+        thumbnail: Item.thumbnail, 
+      })
+    );
   };
 
-  const deleteItem = (id) => {
-    setCart(cart.filter((cart) => cart.id === id));
-  };
   return (
     Item && (
       <Container maxWidth="sm">
@@ -84,7 +89,7 @@ const ItemDetailContainer = () => {
               >
                 Add to cart
               </Button>
-              <Button onClick={() => deleteItem(Item.id)}>Delete Item</Button>
+              {/* <Button onClick={() => deleteItem(Item.id)}>Delete Item</Button> */}
             </Link>
           </div>
         </Card>

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { useState } from "react";
 import { createContext } from "react";
 
-const ShopingCartContext = createContext();
+export const ShopingCartContext = createContext();
 
 export const useShopingCartContext = () => useContext(ShopingCartContext)
 

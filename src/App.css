@@ -1,8 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto';
-
+  font-family: "Roboto";
 }
 
 #root {
@@ -34,10 +33,10 @@
 }
 
 @media only screen and (min-width: 1024px) {
-.userSection {
-  grid-template-columns: 1fr 1fr 1fr;
-  margin-top: 38px;
-}
+  .userSection {
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 38px;
+  }
 }
 
 .logo-nan {
@@ -82,7 +81,7 @@
 }
 
 .css-o69gx8-MuiCardMedia-root {
-  object-fit: contain!important;
+  object-fit: contain !important;
 }
 
 .MuiButtonBase-root ul li {
@@ -90,11 +89,11 @@
   list-style: none;
 }
 .MuiButtonBase-root ul {
-display: flex;
-justify-content: start;
-flex-direction: column;
-text-align: left;
-line-height: 1.5rem;
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.5rem;
 }
 
 .menu-categories {
@@ -122,13 +121,13 @@ line-height: 1.5rem;
 }
 
 .css-73nay0 h1 {
-    font-weight: normal;
-    margin: 240px;
-    font-weight: normal;
-    font-size: 48px;
-    line-height: 4rem;
-    letter-spacing: 4px;
-    font-family: 'Roboto';
+  font-weight: normal;
+  margin: 240px;
+  font-weight: normal;
+  font-size: 48px;
+  line-height: 4rem;
+  letter-spacing: 4px;
+  font-family: "Roboto";
 }
 
 .last-text {
@@ -136,12 +135,12 @@ line-height: 1.5rem;
 }
 
 .FormContainer {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin: 20px;
-	background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  background-color: white;
 }
 
 .purchases-container {
@@ -153,9 +152,14 @@ line-height: 1.5rem;
 
 #demo-simple-select {
   padding: 7px 14px;
-
 }
 
-.purchases-container{
+.purchases-container {
   margin-bottom: 20px;
+}
+
+.shoping-container {
+  display: flex;
+  justify-content: center;
+  height: auto;
 }
