@@ -6,38 +6,35 @@ import Typography from "@mui/material/Typography";
 
 const ItemCart = ({ title, price, qty, thumbnail }) => {
   return (
-    <Card sx={{ 
+    <Card className="card_container_cart_shop" sx={{ 
         width: 345,
          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateColumns: '1fr 2fr',
           height: 'auto',
-          justifyItems: 'center' 
+          justifyItems: 'center', 
+          alignItems: 'center',
         }}>
       <CardMedia
         sx={{ 
             height: 80, 
-            width: 80,
-            gridTemplateColumns: '1fr'
+            width: 80
         }}
 
         image={thumbnail}
         title={title}
 
       />
-      <CardContent 
-      sx={{ 
-        gridTemplateColumns: 'auto'
-      }}>
-        <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 16 }}>
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 16, textAlign: 'left' }}>
           {title}
         </Typography>
-        <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 16 }}>
+        <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 16, textAlign: 'left' }}>
           Precio: {price}
         </Typography>
-        <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 16 }}>
+        <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 16, textAlign: 'left' }}>
           Cantidad: {qty}
         </Typography>
-        <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 16 }}>
+        <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 16, textAlign: 'left' }}>
           Total: {qty * price}
         </Typography>
       </CardContent>
