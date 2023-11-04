@@ -23,6 +23,7 @@ const ItemCart = ({ title, price, qty, thumbnail }) => {
         image={thumbnail}
         title={title}
 
+
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 16, textAlign: 'left' }}>
@@ -35,7 +36,7 @@ const ItemCart = ({ title, price, qty, thumbnail }) => {
           Cantidad: {qty}
         </Typography>
         <Typography gutterBottom variant="h5" component="div" sx={{ fontSize: 16, textAlign: 'left' }}>
-          Total: {qty * price}
+          Sub-Total: {qty * price}
         </Typography>
       </CardContent>
     </Card>
