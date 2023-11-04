@@ -1,16 +1,18 @@
 import Button from "@mui/material/Button";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useShopingCartContext } from "../../hooks/ShopingCartContext";
+
 
 export const CartWidget = () => {
-  const [counter] = useState(5);
+  const [cart, setCart] = useShopingCartContext();
+  console.log(cart);
   return (
     <>
       <Link to={`/Shop`}>
         <Button color="secondary">
           <AddShoppingCartIcon className="cart-widget" />
-          <span>{counter}</span>
+          <span>{cart.length}</span>
         </Button>
       </Link>
     </>
