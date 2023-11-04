@@ -5,8 +5,7 @@ import { useShopingCartContext } from "../../hooks/ShopingCartContext";
 
 
 export const CartWidget = () => {
-  const [cart, setCart] = useShopingCartContext();
-  console.log(cart);
+  const [cart] = useShopingCartContext();
   return (
     <>
       <Link to={`/Shop`}>
