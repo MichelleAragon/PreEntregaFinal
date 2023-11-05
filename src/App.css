@@ -159,11 +159,20 @@
 }
 
 .shoping-container {
-  margin-top: 200px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: auto;
   margin-top: 40px;
+}
+
+.container-shop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin-top: 50px;
+
 }
