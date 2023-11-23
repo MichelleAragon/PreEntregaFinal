@@ -5,10 +5,7 @@ import { Button } from "@mui/material";
 
 const Shop = () => {
   const [cart] = useShopingCartContext();
-
   const total = cart.reduce((acc, item) => acc + item.qty * item.price, 0);
-  console.log(total);
-
   return cart && cart.length > 0 ? (
     <div className="container-shop">
       <Link to={"/"}>

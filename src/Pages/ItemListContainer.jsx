@@ -21,7 +21,7 @@ const ItemListContainer = () => {
   }, []);
 
 
-  const handleProductClick = (id) => {};
+  const handleProductClick = () => {};
 
   return (
     <div className="userSection">

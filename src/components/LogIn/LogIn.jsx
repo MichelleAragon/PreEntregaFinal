@@ -1,88 +1,73 @@
-import Box from "@mui/material/Box";
-import Input from "@mui/material/Input";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import Container from "@mui/material/Container";
+import Button from '@mui/material/Button';
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 import { useState } from "react";
+import TextField from "@mui/material/TextField";
+import MessageSuccess from '../MessageSuccess/MessageSuccess';
+import { useShopingCartContext } from '../../hooks/ShopingCartContext';
 
-const ariaLabel = { "aria-label": "description" };
+// const ariaLabel = { "aria-label": "description" };
 const initialState = {
   name: "",
-  lastName: "",
-  email: "",
-  number: "",
+  lastname: "",
+  email: ""
 };
-
+const styles = {
+  containerShop: {
+    textAlign: "center",
+    paddingTop: 20,
+  },
+};
 export const LogIn = () => {
   const [values, setValues] = useState(initialState);
   const [purchaseID, setPurchaseID] = useState("");
+  const [cart] = useShopingCartContext();
 
   const handleOnChange = (e) => {
     const { value, name } = e.target;
+
     setValues({ ...values, [name]: value });
   };
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
-    const docRef = await addDoc(collection(db, "purchasesCollection"), {
-      values,
-    });
+    const docRef = await addDoc(collection(db, "purchasesCollection"), { ...values, products: cart });
     setValues(initialState);
     setPurchaseID(docRef.id);
-    ///alert(docRef.id);
   };
 
   return (
-    <>
-      <CssBaseline />
-      <Container maxWidth="md">
-        <Box>
-          <div>
-            <h1 style={{ textAlign: "center", marginTop: "20px" }}>Login</h1>
-          </div>
-        </Box>
-        <Box
-          component="form"
-          sx={{
-            bgcolor: "#ededee",
-            display: "flex",
-            flexDirection: "column",
-            mt: 5,
-          }}
-          noValidate
-          autoComplete="off"
-          onSubmit={handleOnSubmit}
-        >
-          <Input
-            placeholder="Name"
-            inputProps={ariaLabel}
-            value={values.name}
-            onChange={handleOnChange}
-            required
-          />
-          <Input
-            placeholder="Last Name"
-            inputProps={ariaLabel}
-            value={values.lastName}
-            onChange={handleOnChange}
-            required
-          />
-          <Input
-            placeholder="Email"
-            inputProps={ariaLabel}
-            value={values.email}
-            onChange={handleOnChange}
-            required
-          />
-          <Input placeholder="Phone" inputProps={ariaLabel} />
-          <Button variant="contained" size="large" onSubmit={handleOnSubmit}>
-            Submit
-          </Button>
-        </Box>
-      </Container>
-    </>
+      <div style={styles.containerShop}>
+      <h1 style={{ color: "white" }}>Shop</h1>
+      <form className="FormContainer" onSubmit={handleOnSubmit}>
+        <TextField
+          placeholder="Name"
+          style={{ margin: 10, width: 400 }}
+          name="name"
+          value={values.name}
+          onChange={handleOnChange}
+          required
+        />
+        <TextField
+          placeholder="Lastname"
+          style={{ margin: 10, width: 400 }}
+          name="lastname"
+          value={values.lastname}
+          onChange={handleOnChange}
+          required
+        />
+        <TextField
+          placeholder="Email"
+          style={{ margin: 10, width: 400 }}
+          name="email"
+          value={values.email}
+          onChange={handleOnChange}
+          required
+        />
+        <Button type="submit" variant="contained" size="large">BUY</Button>
+      </form>
+      {purchaseID && <MessageSuccess purchaseID={purchaseID} />}
+    </div>
   );
 };
 
